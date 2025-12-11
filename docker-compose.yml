@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: imts_postgres
+    environment:
+      POSTGRES_DB: imts_db
+      POSTGRES_USER: imts_user
+      POSTGRES_PASSWORD: imts_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - imts_network
+
+  backend:
+    build: ./backend
+    container_name: imts_backend
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: imts_db
+      DB_USER: imts_user
+      DB_PASSWORD: imts_password
+      JWT_SECRET: your_jwt_secret_key_change_in_production
+      JWT_REFRESH_SECRET: your_refresh_secret_key_change_in_production
+      FILE_UPLOAD_PATH: /app/uploads
+    volumes:
+      - uploads_volume:/app/uploads
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - imts_network
+    command: sh -c "npm run migrate && npm start"
+
+  frontend:
+    build: ./frontend
+    container_name: imts_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/build
+    networks:
+      - imts_network
+
+networks:
+  imts_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  uploads_volume:
