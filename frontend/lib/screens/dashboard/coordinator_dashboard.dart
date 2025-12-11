@@ -57,10 +57,10 @@ class CoordinatorDashboardScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.green,
-                      child: const Icon(
+                      child: Icon(
                         Icons.supervisor_account,
                         size: 30,
                         color: Colors.white,
@@ -133,7 +133,7 @@ class CoordinatorDashboardScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ListTile(
-                      leading: CircleAvatar(child: Text('JS')),
+                      leading: const CircleAvatar(child: Text('JS')),
                       title: const Text('John Smith'),
                       subtitle: const Text('Attendance Submission'),
                       trailing: Row(
@@ -151,7 +151,7 @@ class CoordinatorDashboardScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
-                      leading: CircleAvatar(child: Text('MJ')),
+                      leading: const CircleAvatar(child: Text('MJ')),
                       title: const Text('Mary Johnson'),
                       subtitle: const Text('Document Upload'),
                       trailing: Row(

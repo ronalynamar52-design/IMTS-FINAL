@@ -32,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     'admin',
   ];
 
-  Map<String, String> _roleLabels = {
+  final Map<String, String> _roleLabels = {
     'student': 'Student',
     'coordinator': 'Coordinator',
     'supervisor': 'Supervisor',
@@ -247,7 +247,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Expanded(
                               flex: 2,
                               child: DropdownButtonFormField<String>(
-                                value: _selectedRole,
+                                initialValue: _selectedRole,
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedRole = value;

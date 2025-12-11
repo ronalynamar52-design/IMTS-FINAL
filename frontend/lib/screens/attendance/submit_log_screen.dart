@@ -28,7 +28,7 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
       firstDate: DateTime.now().subtract(const Duration(days: 30)),
       lastDate: DateTime.now(),
     );
-    
+
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
@@ -41,7 +41,7 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
       context: context,
       initialTime: isTimeIn ? _timeIn : _timeOut,
     );
-    
+
     if (picked != null) {
       setState(() {
         if (isTimeIn) {
@@ -58,7 +58,7 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx'],
     );
-    
+
     if (result != null) {
       setState(() {
         _selectedFile = result.files.first;
@@ -68,33 +68,31 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
 
   String _calculateHours() {
     final now = DateTime.now();
-    final timeIn = DateTime(
-      now.year, now.month, now.day, 
-      _timeIn.hour, _timeIn.minute
-    );
-    final timeOut = DateTime(
-      now.year, now.month, now.day, 
-      _timeOut.hour, _timeOut.minute
-    );
-    
+    final timeIn =
+        DateTime(now.year, now.month, now.day, _timeIn.hour, _timeIn.minute);
+    final timeOut =
+        DateTime(now.year, now.month, now.day, _timeOut.hour, _timeOut.minute);
+
     final difference = timeOut.difference(timeIn);
     final hours = difference.inMinutes / 60;
-    
+
     return hours.toStringAsFixed(2);
   }
 
   Future<void> _submitLog() async {
     if (_formKey.currentState!.validate()) {
       final provider = Provider.of<AttendanceProvider>(context, listen: false);
-      
+
       final success = await provider.submitDailyLog(
         date: DateFormat('yyyy-MM-dd').format(_selectedDate),
-        timeIn: '${_timeIn.hour.toString().padLeft(2, '0')}:${_timeIn.minute.toString().padLeft(2, '0')}',
-        timeOut: '${_timeOut.hour.toString().padLeft(2, '0')}:${_timeOut.minute.toString().padLeft(2, '0')}',
+        timeIn:
+            '${_timeIn.hour.toString().padLeft(2, '0')}:${_timeIn.minute.toString().padLeft(2, '0')}',
+        timeOut:
+            '${_timeOut.hour.toString().padLeft(2, '0')}:${_timeOut.minute.toString().padLeft(2, '0')}',
         logText: _logController.text,
         file: _selectedFile,
       );
-      
+
       if (success) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -151,7 +149,8 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                DateFormat('EEEE, MMMM d, yyyy').format(_selectedDate),
+                                DateFormat('EEEE, MMMM d, yyyy')
+                                    .format(_selectedDate),
                                 style: const TextStyle(fontSize: 16),
                               ),
                               const Icon(Icons.calendar_today),
@@ -191,11 +190,13 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
                                   child: Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade300),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           _timeIn.format(context),
@@ -221,11 +222,13 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
                                   child: Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey.shade300),
+                                      border: Border.all(
+                                          color: Colors.grey.shade300),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           _timeOut.format(context),
@@ -251,10 +254,13 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
                           ),
                           Text(
                             '${_calculateHours()} hours',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                           ),
                         ],
                       ),
@@ -314,7 +320,8 @@ class _SubmitLogScreenState extends State<SubmitLogScreen> {
                         ListTile(
                           leading: const Icon(Icons.attach_file),
                           title: Text(_selectedFile!.name),
-                          subtitle: Text('${(_selectedFile!.size / 1024).toStringAsFixed(2)} KB'),
+                          subtitle: Text(
+                              '${(_selectedFile!.size / 1024).toStringAsFixed(2)} KB'),
                           trailing: IconButton(
                             icon: const Icon(Icons.close),
                             onPressed: () {

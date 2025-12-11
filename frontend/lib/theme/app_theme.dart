@@ -17,7 +17,6 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: primaryColor,
       secondary: primaryLight,
-      background: Colors.grey[50]!,
       surface: Colors.white,
       error: errorColor,
     ),
@@ -46,7 +45,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: primaryColor),
+        borderSide: const BorderSide(color: primaryColor),
       ),
       fillColor: Colors.white,
       filled: true,
@@ -105,12 +104,11 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: primaryColor,
       secondary: primaryLight,
-      background: backgroundColor,
       surface: surfaceColor,
       error: errorColor,
     ),
     scaffoldBackgroundColor: backgroundColor,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: surfaceColor,
       foregroundColor: Colors.white,
       elevation: 0,
@@ -134,7 +132,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: primaryColor),
+        borderSide: const BorderSide(color: primaryColor),
       ),
       fillColor: surfaceColor,
       filled: true,
@@ -153,22 +151,22 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
-      displayLarge: TextStyle(
+      displayLarge: const TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      displayMedium: TextStyle(
+      displayMedium: const TextStyle(
         fontSize: 28,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      displaySmall: TextStyle(
+      displaySmall: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: Colors.white,
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
         color: Colors.white,

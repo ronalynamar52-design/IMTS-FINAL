@@ -71,22 +71,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _showChangePasswordDialog() {
-    final _currentPasswordController = TextEditingController();
-    final _newPasswordController = TextEditingController();
-    final _confirmNewPasswordController = TextEditingController();
-    final _passwordFormKey = GlobalKey<FormState>();
+    final currentPasswordController = TextEditingController();
+    final newPasswordController = TextEditingController();
+    final confirmNewPasswordController = TextEditingController();
+    final passwordFormKey = GlobalKey<FormState>();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Change Password'),
         content: Form(
-          key: _passwordFormKey,
+          key: passwordFormKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                controller: _currentPasswordController,
+                controller: currentPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Current Password',
@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _newPasswordController,
+                controller: newPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'New Password',
@@ -123,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _confirmNewPasswordController,
+                controller: confirmNewPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Confirm New Password',
@@ -133,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Confirm new password';
                   }
-                  if (value != _newPasswordController.text) {
+                  if (value != newPasswordController.text) {
                     return 'Passwords do not match';
                   }
                   return null;
@@ -149,11 +149,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           ElevatedButton(
             onPressed: () async {
-              if (_passwordFormKey.currentState!.validate()) {
+              if (passwordFormKey.currentState!.validate()) {
                 final authProvider = Provider.of<AuthProvider>(context, listen: false);
                 final success = await authProvider.changePassword(
-                  _currentPasswordController.text,
-                  _newPasswordController.text,
+                  currentPasswordController.text,
+                  newPasswordController.text,
                 );
 
                 Navigator.pop(context); // Close dialog

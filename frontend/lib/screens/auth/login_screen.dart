@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     'admin',
   ];
 
-  Map<String, String> _roleLabels = {
+  final Map<String, String> _roleLabels = {
     'student': 'Student',
     'coordinator': 'Coordinator',
     'supervisor': 'Supervisor',
@@ -192,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 16),
                         DropdownButtonFormField<String>(
-                          value: _selectedRole,
+                          initialValue: _selectedRole,
                           onChanged: (value) {
                             setState(() {
                               _selectedRole = value;

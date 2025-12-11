@@ -64,10 +64,10 @@ class _SupervisorDashboardScreenState extends State<SupervisorDashboardScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.orange,
-                      child: const Icon(
+                      child: Icon(
                         Icons.supervised_user_circle,
                         size: 30,
                         color: Colors.white,

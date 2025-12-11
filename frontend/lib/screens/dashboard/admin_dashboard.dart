@@ -64,10 +64,10 @@ class AdminDashboardScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.purple,
-                      child: const Icon(
+                      child: Icon(
                         Icons.admin_panel_settings,
                         size: 30,
                         color: Colors.white,
@@ -239,31 +239,31 @@ class AdminDashboardScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // System Alerts
-            Card(
+            const Card(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'System Alerts',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     ListTile(
-                      leading: const Icon(Icons.warning, color: Colors.orange),
-                      title: const Text('Storage Warning'),
-                      subtitle: const Text('Storage is at 85% capacity'),
-                      trailing: const Text('2h ago'),
+                      leading: Icon(Icons.warning, color: Colors.orange),
+                      title: Text('Storage Warning'),
+                      subtitle: Text('Storage is at 85% capacity'),
+                      trailing: Text('2h ago'),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.info, color: Colors.blue),
-                      title: const Text('System Update'),
-                      subtitle: const Text('New version available'),
-                      trailing: const Text('1d ago'),
+                      leading: Icon(Icons.info, color: Colors.blue),
+                      title: Text('System Update'),
+                      subtitle: Text('New version available'),
+                      trailing: Text('1d ago'),
                     ),
                   ],
                 ),

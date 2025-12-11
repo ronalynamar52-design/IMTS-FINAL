@@ -4,6 +4,7 @@ import 'screens/splash_screen.dart';
 import 'providers/auth_provider.dart';
 import 'providers/message_provider.dart';
 import 'providers/dashboard_provider.dart';
+import 'providers/attendance_provider.dart';
 import 'theme/app_theme.dart';
 
 void main() {
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MessageProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
+        ChangeNotifierProvider(create: (_) => AttendanceProvider()),
       ],
       child: MaterialApp(
         title: 'Internship Management System',

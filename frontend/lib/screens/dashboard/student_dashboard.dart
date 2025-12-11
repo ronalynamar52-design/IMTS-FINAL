@@ -773,22 +773,22 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
   }
 
   void _showChangePasswordDialog() {
-    final _currentPasswordController = TextEditingController();
-    final _newPasswordController = TextEditingController();
-    final _confirmNewPasswordController = TextEditingController();
-    final _passwordFormKey = GlobalKey<FormState>();
+    final currentPasswordController = TextEditingController();
+    final newPasswordController = TextEditingController();
+    final confirmNewPasswordController = TextEditingController();
+    final passwordFormKey = GlobalKey<FormState>();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Change Password'),
         content: Form(
-          key: _passwordFormKey,
+          key: passwordFormKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                controller: _currentPasswordController,
+                controller: currentPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Current Password',
@@ -803,7 +803,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _newPasswordController,
+                controller: newPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'New Password',
@@ -825,7 +825,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _confirmNewPasswordController,
+                controller: confirmNewPasswordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Confirm New Password',
@@ -835,7 +835,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
                   if (value == null || value.isEmpty) {
                     return 'Confirm new password';
                   }
-                  if (value != _newPasswordController.text) {
+                  if (value != newPasswordController.text) {
                     return 'Passwords do not match';
                   }
                   return null;
@@ -851,11 +851,11 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
           ),
           ElevatedButton(
             onPressed: () async {
-              if (_passwordFormKey.currentState!.validate()) {
+              if (passwordFormKey.currentState!.validate()) {
                 final authProvider = Provider.of<AuthProvider>(context, listen: false);
                 final success = await authProvider.changePassword(
-                  _currentPasswordController.text,
-                  _newPasswordController.text,
+                  currentPasswordController.text,
+                  newPasswordController.text,
                 );
 
                 Navigator.pop(context); // Close dialog
@@ -893,22 +893,22 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
   void _showEditProfileDialog() {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final currentUser = authProvider.user;
-    final _nameController = TextEditingController(text: currentUser?.name ?? '');
-    final _phoneController = TextEditingController(text: currentUser?.phone ?? '');
-    final _departmentController = TextEditingController(text: currentUser?.department ?? '');
-    final _profileFormKey = GlobalKey<FormState>();
+    final nameController = TextEditingController(text: currentUser?.name ?? '');
+    final phoneController = TextEditingController(text: currentUser?.phone ?? '');
+    final departmentController = TextEditingController(text: currentUser?.department ?? '');
+    final profileFormKey = GlobalKey<FormState>();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Edit Profile'),
         content: Form(
-          key: _profileFormKey,
+          key: profileFormKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                controller: _nameController,
+                controller: nameController,
                 decoration: const InputDecoration(
                   labelText: 'Full Name',
                   prefixIcon: Icon(Icons.person),
@@ -922,7 +922,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _phoneController,
+                controller: phoneController,
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   prefixIcon: Icon(Icons.phone),
@@ -930,7 +930,7 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _departmentController,
+                controller: departmentController,
                 decoration: const InputDecoration(
                   labelText: 'Department',
                   prefixIcon: Icon(Icons.school),
@@ -946,12 +946,12 @@ class _StudentDashboardScreenState extends State<StudentDashboardScreen> with Si
           ),
           ElevatedButton(
             onPressed: () async {
-              if (_profileFormKey.currentState!.validate()) {
+              if (profileFormKey.currentState!.validate()) {
                 final authProvider = Provider.of<AuthProvider>(context, listen: false);
                 final success = await authProvider.updateProfile({
-                  'name': _nameController.text.trim(),
-                  'phone': _phoneController.text.trim().isEmpty ? null : _phoneController.text.trim(),
-                  'department': _departmentController.text.trim(),
+                  'name': nameController.text.trim(),
+                  'phone': phoneController.text.trim().isEmpty ? null : phoneController.text.trim(),
+                  'department': departmentController.text.trim(),
                 });
 
                 Navigator.pop(context); // Close dialog
